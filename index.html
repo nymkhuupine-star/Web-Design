@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="mn" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arooth - Crafting Modern Vision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-text {
+            font-size: clamp(60px, 15vw, 200px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card img {
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .counter {
+            font-size: clamp(40px, 8vw, 100px);
+            font-weight: 900;
+        }
+
+        .scroll-text {
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-20%);
+            }
+
+            45% {
+                transform: translateX(-20%);
+            }
+
+            50% {
+                transform: translateX(-40%);
+            }
+
+            70% {
+                transform: translateX(-40%);
+            }
+
+            75% {
+                transform: translateX(-60%);
+            }
+
+            95% {
+                transform: translateX(-60%);
+            }
+
+            100% {
+                transform: translateX(-80%);
+            }
+        }
+
+        .slider-animate {
+            animation: slide 20s ease-in-out infinite;
+        }
+
+
+        .accordion-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item input[type="radio"] {
+            display: none;
+        }
+
+        .accordion-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .question-header {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Default state - collapsed */
+        .accordion-item:not(:has(input:checked)) {
+            flex: 0 0 auto;
+            width: 170px;
+            min-width: 170px;
+        }
+
+        /* Expanded state */
+        .accordion-item:has(input:checked) {
+            flex: 1;
+            min-width: 500px;
+        }
+
+
+      .accordion-item input[type="radio"]:checked ~ .accordion-wrapper {
+  background: linear-gradient(to bottom right, #1e40af, #2563eb, #4f46e5); 
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+        .accordion-item input[type="radio"]:checked~.accordion-wrapper .accordion-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .accordion-item input[type="radio"]:checked~.accordion-wrapper .question-header {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+        }
+
+        .accordion-item input[type="radio"]:checked~.accordion-wrapper .toggle-btn::before {
+            content: '−';
+        }
+
+        .accordion-item input[type="radio"]:checked~.accordion-wrapper .toggle-btn {
+            color: white;
+        }
+
+        .toggle-btn::before {
+            content: '+';
+        }
+
+        .question-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .accordion-grid {
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-black overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl">
+        <div class="bg-white rounded-full shadow-lg px-6 py-3 flex items-center justify-between">
+
+
+            <div class="flex items-center gap-2 font-bold text-xl">
+                <span class="text-blue-600">◀</span>
+                Arooth
+            </div>
+
+            <div class="hidden md:flex items-center bg-gray-100 rounded-full px-2 py-1 gap-1">
+                <a href="#home" class="px-4 py-2 rounded-full text-sm bg-white shadow text-blue-600">
+                    Home
+                </a>
+                <a href="#about" class="px-4 py-2 rounded-full text-sm hover:bg-white">
+                    About Us
+                </a>
+                <a href="#services" class="px-4 py-2 rounded-full text-sm hover:bg-white">
+                    Services
+                </a>
+                <a href="#works" class="px-4 py-2 rounded-full text-sm hover:bg-white">
+                    Works
+                </a>
+                <a href="#contact" class="px-4 py-2 rounded-full text-sm hover:bg-white">
+                    Contact
+                </a>
+            </div>
+
+
+            <button
+                class="flex items-center gap-2 bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition">
+                View All Services
+                <span class="bg-white text-blue-600 rounded-full w-6 h-6 flex items-center justify-center">
+                    ↗
+                </span>
+            </button>
+
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+
+    <section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-20 bg-cover bg-center"
+        style="background-image: url('./images/hero.jpg');">
+
+        <!-- IMAGE → WHITE GRADIENT -->
+        <div class="absolute inset-0 z-0
+         bg-gradient-to-b
+         from-transparent
+         via-white/5
+         to-white">
+        </div>
+
+        <!-- CONTENT -->
+        <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
+            <div class="flex justify-end">
+                <div class="max-w-2xl text-right">
+
+                    <h1 class="text-black text-4xl md:text-6xl lg:text-7xl">
+                        Crafting Modern
+                    </h1>
+
+                    <div class="flex justify-end items-center gap-4">
+                        <hr class="w-[100px] h-1 bg-blue-600 border-none mt-3">
+                        <h1 class="text-blue-600 text-4xl md:text-6xl lg:text-7xl">
+                            Vision For the
+                        </h1>
+                    </div>
+
+                    <h1 class="text-black text-4xl md:text-6xl lg:text-7xl">
+                        Ambitious Brands
+                    </h1>
+
+                    <p class="text-gray-500 text-base md:text-lg leading-relaxed mt-6 mb-12">
+                        We blend creativity with strategy to build digital experiences that move brands forward. From
+                        crafting standout websites.
+                    </p>
+
+                    <div class="flex justify-end">
+                        <button class="group inline-flex items-center gap-3 bg-white px-8 py-4
+                   rounded-full text-base font-semibold text-black
+                   transition-all duration-300 hover:scale-105
+                   shadow-lg shadow-blue-600/30">
+                            Get Started Now
+                            <span class="w-8 h-8 flex items-center justify-center rounded-full
+                     bg-blue-600 text-white
+                     group-hover:translate-x-1 transition">
+                                →
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 z-30 overflow-hidden ">
+            <div
+                class=" text-7xl md:text-[120px] font-normal  tracking-wide scroll-text whitespace-nowrap inline-block gap-4  ">
+
+                <span class="font-normal text-black"> REAL</span>
+                <span class="text-blue-600 italic">RESULTS</span>
+                <span class=" italic text-black">REAL</span>
+                <span class=" italic text-black">RESULTS</span>
+                <span>*</span>
+
+
+                <span class="font-normal text-black">MODERN</span>
+                <span class="text-blue-600 italic">DESIGN</span>
+                <span>*</span>
+            </div>
+        </div>
+
+        <!-- BOTTOM FADE (DOOR TALD) -->
+        <div class="absolute bottom-0 left-0 w-full h-64 z-10
+         bg-gradient-to-t from-white via-white/100 to-transparent">
+        </div>
+
+    </section>
+
+
+    <!-- About Section -->
+    <section id="about" class="relative bg-white py-20">
+        <div class="max-w-7xl mx-auto px-6">
+
+
+            <div class="flex items-center gap-3 mb-16">
+                <div class="bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 flex items-center gap-2">
+                    <span class="text-blue-600 text-xl">👑</span>
+                    <h3 class="text-blue-600 text-base font-medium">About Us</h3>
+                </div>
+            </div>
+
+
+            <div class="flex flex-row gap-16 items-center">
+
+
+                <div class="flex-shrink-0 relative">
+                    <div class="text-[180px] lg:text-[220px] font-bold leading-none text-blue-600">
+                        40+
+                    </div>
+
+
+                    <div
+                        class="absolute top-8 -left-4 bg-purple-100 text-purple-700 px-5 py-2 rounded-full text-sm font-medium">
+                        Worldwide
+                    </div>
+
+
+                    <div
+                        class="absolute top-32 right-0 bg-blue-50 text-gray-700 px-5 py-2 rounded-full text-sm font-medium">
+                        Awards Won
+                    </div>
+                </div>
+
+
+                <div class="h-64 w-px bg-gray-300"></div>
+
+
+                <div class="flex-1">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-8 leading-tight text-gray-900">
+                        Our team of designers, developers, and thinkers driven by
+                        <span class="text-blue-600">one purpose — to craft digital experiences.</span>
+                    </h2>
+
+                    <p class="text-gray-500 text-lg mb-10 leading-relaxed">
+                        We combine strategy, creativity, and technology to help brands grow in the modern digital
+                        landscape. Every project we take on is fueled by curiosity, guided by precision.
+                    </p>
+
+                    <button
+                        class="group inline-flex items-center gap-3 bg-gray-100 hover:bg-gray-200 px-8 py-4 rounded-full font-medium transition-all duration-300">
+                        <span class="text-gray-900">More About Us</span>
+                        <span
+                            class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white group-hover:translate-x-1 transition-transform">
+                            ↗
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="max-w-7xl mx-auto px-6 flex flex-row gap-[20px]">
+        <div>
+            <img src="./images/card.jpg" alt="Project" class="w-[500px] h-[200px] border rounded-xl">
+        </div>
+
+        <div class="bg-sky-50 rounded-3xl p-8 shadow-lg flex items-center gap-8 h-[200px] w-[750px]">
+
+            <img src="./images/time.jpg" class="w-[180px] h-[180px] rounded-3xl ">
+
+            <div class="flex gap-16 flex-1">
+                <div>
+                    <div class="text-6xl font-bold text-gray-900 mb-2">
+                        95%
+                    </div>
+                    <p class="text-gray-600 text-sm font-medium uppercase tracking-wide">
+                        CLIENTS SATISFIED AND<br>REPEATING
+                    </p>
+                </div>
+
+                <div>
+                    <div class="text-6xl font-bold text-gray-900 mb-2">
+                        125+
+                    </div>
+                    <p class="text-gray-600 text-sm font-medium uppercase tracking-wide">
+                        PROJECTS COMPLETED<br>IN 24 COUNTRIES
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                    <span class="text-2xl">✦</span>
+                </div>
+                <h3 class="text-blue-500 text-lg font-semibold">Our Services</h3>
+            </div>
+
+            <h2 class="text-4xl md:text-6xl font-bold mb-16">
+                Creativity Meets<br />Functionality.
+            </h2>
+
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-row gap-[20px]">
+                    <!-- Service Card 1 -->
+                    <div class="service-card bg-sky-50 rounded-3xl p-8 w-[400px] h-[400px] flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Site Of The Day</h3>
+                        <p class="text-gray-500 hover:text-blue-400 font-medium mb-4">
+                            Product Design
+                        </p>
+                        <div class="text-8xl flex justify-center items-center flex-1">
+                            🧩</div>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="service-card bg-sky-50 rounded-3xl p-8 w-[400px] h-[400px] flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Digital Excellence</h3>
+                        <p class="text-gray-500 hover:text-blue-400 font-medium mb-4">
+                            Product Design
+                        </p>
+                        <div class="text-8xl flex justify-center items-center flex-1">
+                            🖇️</div>
+                    </div>
+
+
+
+                    <!-- Service Card 3 -->
+                    <div class="service-card bg-sky-50 rounded-3xl p-8 w-[400px] h-[400px] flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Creative Agency</h3>
+                        <p class="text-gray-500 hover:text-blue-400 font-medium mb-4">
+                            Product Design
+                        </p>
+                        <div class="text-8xl flex justify-center items-center flex-1">
+                            🗞️</div>
+                    </div>
+
+                </div>
+                <div class="flex flex-row gap-[20px]">
+
+                    <!-- Service Card 4 -->
+                    <div class="service-card bg-sky-50 rounded-3xl p-8 w-[400px] h-[400px] flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Innovative Design</h3>
+                        <p class="text-gray-500 hover:text-blue-400 font-medium mb-4">
+                            Product Design
+                        </p>
+                        <div class="text-8xl flex justify-center items-center flex-1">
+                            📜</div>
+                    </div>
+
+
+                    <!-- Service Card 5 -->
+                    <div class="service-card bg-sky-50 rounded-3xl p-8 w-[400px] h-[400px] flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Top Branding</h3>
+                        <p class="text-gray-500 hover:text-blue-400 font-medium mb-4">
+                            Product Design
+                        </p>
+                        <div class="text-8xl flex justify-center items-center flex-1">
+                            💿</div>
+                    </div>
+
+                    <!-- Service Card 6 -->
+                    <div class="service-card bg-sky-50 rounded-3xl p-8 w-[400px] h-[400px] flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4">Web Innovation</h3>
+                        <p class="text-gray-500 hover:text-blue-400 font-medium mb-4">
+                            Product Design
+                        </p>
+                        <div class="text-8xl flex justify-center items-center flex-1">
+                            ⏳</div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="min-h-screen bg-white flex items-center justify-center p-8 flex-col">
+        <div class="flex justify-center mb-12">
+
+
+            <div class="inline-flex items-center gap-2 px-6 py-3 border-2 border-blue-600 rounded-full mb-8">
+                <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span class="text-blue-600 font-medium text-lg">Our Testimonials</span>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="text-3xl md:text-3xl text-center font-normal leading-tight space-y-2">
+            <p class="text-gray-900">Our success is measured by the</p>
+            <p class="text-gray-900">satisfaction of our clients. We <span class="text-blue-600 font-semibold">take
+                    pride</span></p>
+            <p class="text-blue-600 font-semibold">in building long partnerships.</p>
+        </div>
+
+
+        <div class="w-full max-w-[1200px] ">
+
+            <!-- SLIDER CONTAINER -->
+            <div class="relative bg-white rounded-3xl shadow-xl p-12 overflow-hidden">
+                <div class="flex items-center gap-8">
+                    <div class="w-96 h-96 flex-shrink-0 relative overflow-hidden">
+                        <div class="absolute inset-0 flex gap-6 w-[calc(500%+6rem)] slider-animate">
+                            <div
+                                class="w-[20%] h-full bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl flex items-end justify-center overflow-hidden ">
+                                <img src="./images/comment1.jpg" class="w-full h-full object-cover">
+                            </div>
+
+                            <!-- Image 2 -->
+                            <div
+                                class="w-[20%] h-full bg-gradient-to-br from-purple-400 to-purple-600 rounded-3xl flex items-end justify-center overflow-hidden">
+                                <img src="./images/comment2.jpg" class="w-full h-full object-cover">
+                            </div>
+
+                            <!-- Image 3 -->
+                            <div
+                                class="w-[20%] h-full bg-gradient-to-br from-pink-400 to-pink-600 rounded-3xl flex items-end justify-center overflow-hidden">
+                                <img src="./images/comment3.jpg" class="w-full h-full object-cover">
+                            </div>
+
+                            <!-- Image 4 -->
+                            <div
+                                class="w-[20%] h-full bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-3xl flex items-end justify-center overflow-hidden">
+                                <img src="./images/comment4.jpg" class="w-full h-full object-cover">
+                            </div>
+
+                            <!-- Image 5 -->
+                            <div
+                                class="w-[20%] h-full bg-gradient-to-br from-green-400 to-green-600 rounded-3xl flex items-end justify-center overflow-hidden">
+                                <img src="./images/comment5.jpg" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CONTENT SECTION -->
+                    <div class="flex-1 relative">
+
+                        <!-- Quote Icon -->
+                        <div class="absolute -top-4 right-0 text-blue-100 text-8xl font-serif">"</div>
+
+                        <!-- Company Logo & Name -->
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Vario</h2>
+                        </div>
+
+                        <!-- Author Name - Transitions -->
+                        <div class="relative h-8 mb-8 overflow-hidden">
+                            <div class="absolute inset-0 flex w-[500%] slider-animate">
+                                <div class="w-[20%] text-lg italic text-gray-600">Emma Johnson</div>
+                                <div class="w-[20%] text-lg italic text-gray-600">Michael Chen</div>
+                                <div class="w-[20%] text-lg italic text-gray-600">Sarah Williams</div>
+                                <div class="w-[20%] text-lg italic text-gray-600">David Martinez</div>
+                                <div class="w-[20%] text-lg italic text-gray-600">Lisa Anderson</div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial Text - Transitions -->
+                        <div class="relative min-h-[200px] overflow-hidden">
+                            <div class="absolute inset-0 flex w-[500%] slider-animate">
+                                <div class="w-[20%] pr-12">
+                                    <p class="text-2xl text-gray-800 leading-relaxed">
+                                        "The team at Arooth transformed our ideas into a polished and professional
+                                        digital experience. Communication was smooth, timelines were met, and the final
+                                        outcome was exceptional."
+                                    </p>
+                                </div>
+                                <div class="w-[20%] pr-12">
+                                    <p class="text-2xl text-gray-800 leading-relaxed">
+                                        "Outstanding work! The attention to detail and creative solutions exceeded our
+                                        expectations. Highly recommend their services for anyone looking to elevate
+                                        their brand."
+                                    </p>
+                                </div>
+                                <div class="w-[20%] pr-12">
+                                    <p class="text-2xl text-gray-800 leading-relaxed">
+                                        "Working with this team was an absolute pleasure. They understood our vision
+                                        perfectly and delivered a product that truly represents our company's values and
+                                        goals."
+                                    </p>
+                                </div>
+                                <div class="w-[20%] pr-12">
+                                    <p class="text-2xl text-gray-800 leading-relaxed">
+                                        "Professional, efficient, and incredibly talented. They took our concept and
+                                        turned it into something beyond what we imagined. The results speak for
+                                        themselves."
+                                    </p>
+                                </div>
+                                <div class="w-[20%] pr-12">
+                                    <p class="text-2xl text-gray-800 leading-relaxed">
+                                        "From start to finish, the process was seamless. The team's expertise and
+                                        dedication made all the difference. We couldn't be happier with the final
+                                        product."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- INDICATOR DOTS -->
+                <div class="flex justify-center gap-2 mt-8">
+                    <div class="w-8 h-2 rounded-full bg-blue-600"></div>
+                    <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- INDICATOR DOTS -->
+        <div class="flex justify-center gap-2 mt-6">
+            <label for="c1"
+                class="w-3 h-3 rounded-full bg-white/30 cursor-pointer hover:bg-white/50 transition-all duration-300 peer-checked/c1:bg-cyan-500 peer-checked/c1:w-8"></label>
+            <label for="c2"
+                class="w-3 h-3 rounded-full bg-white/30 cursor-pointer hover:bg-white/50 transition-all duration-300 peer-checked/c2:bg-cyan-500 peer-checked/c2:w-8"></label>
+            <label for="c3"
+                class="w-3 h-3 rounded-full bg-white/30 cursor-pointer hover:bg-white/50 transition-all duration-300 peer-checked/c3:bg-cyan-500 peer-checked/c3:w-8"></label>
+            <label for="c4"
+                class="w-3 h-3 rounded-full bg-white/30 cursor-pointer hover:bg-white/50 transition-all duration-300 peer-checked/c4:bg-cyan-500 peer-checked/c4:w-8"></label>
+            <label for="c5"
+                class="w-3 h-3 rounded-full bg-white/30 cursor-pointer hover:bg-white/50 transition-all duration-300 peer-checked/c5:bg-cyan-500 peer-checked/c5:w-8"></label>
+        </div>
+
+    </div>
+    </div>
+    <div class=" gap-[150px] mb-12 flex justify-center ">
+
+        <!-- Stat 1 -->
+        <div class="text-center relative">
+            <div class="text-6xl font-bold text-gray-900 mb-2">
+                90<span class="text-blue-600">%</span>
+            </div>
+
+            <p class="text-sm text-gray-600 leading-tight">Client Satisfaction Rate</p>
+            <div class="absolute -right-[75px] top-0 bottom-0 w-px bg-gray-300"></div>
+        </div>
+
+
+
+        <!-- Stat 2 -->
+        <div class="text-center relative">
+            <div class="text-6xl font-bold text-gray-900 mb-2">
+                120<span class="text-blue-600">+</span>
+            </div>
+
+            <p class="text-sm text-gray-600 leading-tight">Global Brands Served Worldwide</p>
+            <div class="absolute -right-[75px] top-0 bottom-0 w-px bg-gray-300"></div>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="text-center relative">
+            <div class="text-6xl font-bold text-gray-900 mb-2">
+                5<span class="text-blue-600">X</span>
+            </div>
+
+            <p class="text-sm text-gray-600 leading-tight">Average Growth Achieved</p>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <!-- CTA Section -->
+    <section class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-7xl mx-auto accordion-grid">
+
+            <!-- Question 01 -->
+            <div class="accordion-item ">
+                <input type="radio" name="accordion" id="q1">
+                <label for="q1"
+                    class="accordion-wrapper block bg-slate-100 rounded-3xl p-6 cursor-pointer hover:shadow-xl transition-all h-[600px] flex flex-col">
+                    <div class="question-header flex justify-between items-start h-full">
+                        <h3 class="question-text text-lg font-medium text-gray-800">What services does Arooth offer?
+                        </h3>
+                        <span class="toggle-btn text-2xl font-light text-blue-600 transition-colors"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-8 ">
+                            <h3 class="text-sm tracking-widest uppercase text-blue-200 font-medium">
+                                Question 01
+                            </h3>
+                            <span class="toggle-btn text-3xl font-light text-white transition-transform duration-300">
+                            </span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-4xl font-bold text-white mb-6 leading-tight max-w-3xl">
+                            Question Answer:
+                        </h4>
+
+                        <!-- Content -->
+                        <div class="text-blue-100 text-lg leading-relaxed mb-10 max-w-3xl">
+                            <p class="mb-5">
+                                Arooth provides comprehensive digital solutions including:
+                            </p>
+
+                            <ul class="list-disc list-inside space-y-3 pl-1">
+                                <li>Web Design & Development</li>
+                                <li>Brand Identity & Strategy</li>
+                                <li>Digital Marketing</li>
+                                <li>UI/UX Design</li>
+                                <li>SEO Optimization</li>
+                            </ul>
+                        </div>
+
+                        <!-- CTA -->
+                        <button
+                            class="group inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-blue-50 hover:gap-4">
+                            More About Us
+                            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+
+                </label>
+            </div>
+
+            <!-- Question 02 -->
+            <div class="accordion-item">
+                <input type="radio" name="accordion" id="q2">
+                <label for="q2"
+                    class="accordion-wrapper block bg-slate-100 rounded-3xl p-6 cursor-pointer hover:shadow-xl transition-all h-[600px] flex flex-col">
+                    <div class="question-header flex justify-between items-start h-full">
+                        <h3 class="question-text text-lg font-medium text-gray-800">How long does a typical project
+                            take?</h3>
+                        <span class="toggle-btn text-2xl font-light text-blue-600 transition-colors"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="flex justify-between items-center mb-8 ">
+                            <h3 class="text-sm tracking-widest uppercase text-blue-200 font-medium">
+                                Question 01
+                            </h3>
+                            <span class="toggle-btn text-3xl font-light text-white transition-transform duration-300">
+                            </span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-4xl font-bold text-white mb-6 leading-tight max-w-3xl">
+                            Question Answer:
+                        </h4>
+
+                        <!-- Content -->
+                        <div class="text-blue-100 text-lg leading-relaxed mb-10 max-w-3xl">
+                            <p class="mb-5">
+                                Arooth provides comprehensive digital solutions including:
+                            </p>
+
+                            <ul class="list-disc list-inside space-y-3 pl-1">
+                                <li>Web Design & Development</li>
+                                <li>Brand Identity & Strategy</li>
+                                <li>Digital Marketing</li>
+                                <li>UI/UX Design</li>
+                                <li>SEO Optimization</li>
+                            </ul>
+                        </div>
+
+                        <!-- CTA -->
+                        <button
+                            class="group inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-blue-50 hover:gap-4">
+                            More About Us
+                            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Question 03 - Default Active -->
+            <div class="accordion-item">
+                <input type="radio" name="accordion" id="q3" checked>
+                <label for="q3"
+                    class="accordion-wrapper block bg-slate-100 rounded-3xl p-8 cursor-pointer transition-all  h-[600px] flex flex-col">
+                    <div class="question-header flex justify-between items-start h-full">
+                        <h3 class="question-text text-lg font-medium text-gray-800">What does Arooth provide?</h3>
+                        <span class="toggle-btn text-2xl font-light text-blue-600 transition-colors"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="flex justify-between items-center mb-8 ">
+                            <h3 class="text-sm tracking-widest uppercase text-blue-200 font-medium">
+                                Question 01
+                            </h3>
+                            <span class="toggle-btn text-3xl font-light text-white transition-transform duration-300">
+                            </span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-4xl font-bold text-white mb-6 leading-tight max-w-3xl">
+                            Question Answer:
+                        </h4>
+
+                        <!-- Content -->
+                        <div class="text-blue-100 text-lg leading-relaxed mb-10 max-w-3xl">
+                            <p class="mb-5">
+                                Arooth provides comprehensive digital solutions including:
+                            </p>
+
+                            <ul class="list-disc list-inside space-y-3 pl-1">
+                                <li>Web Design & Development</li>
+                                <li>Brand Identity & Strategy</li>
+                                <li>Digital Marketing</li>
+                                <li>UI/UX Design</li>
+                                <li>SEO Optimization</li>
+                            </ul>
+                        </div>
+
+                        <!-- CTA -->
+                        <button
+                            class="group inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-blue-50 hover:gap-4">
+                            More About Us
+                            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Question 04 -->
+            <div class="accordion-item">
+                <input type="radio" name="accordion" id="q4">
+                <label for="q4"
+                    class="accordion-wrapper block bg-slate-100 rounded-3xl p-6 cursor-pointer hover:shadow-xl transition-all  h-[600px] flex flex-col">
+                    <div class="question-header flex justify-between items-start h-full">
+                        <h3 class="question-text text-lg font-medium text-gray-800">How can we get started with Arooth?
+                        </h3>
+                        <span class="toggle-btn text-2xl font-light text-blue-600 transition-colors"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="flex justify-between items-center mb-8 ">
+                            <h3 class="text-sm tracking-widest uppercase text-blue-200 font-medium">
+                                Question 01
+                            </h3>
+                            <span class="toggle-btn text-3xl font-light text-white transition-transform duration-300">
+                            </span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-4xl font-bold text-white mb-6 leading-tight max-w-3xl">
+                            Question Answer:
+                        </h4>
+
+                        <!-- Content -->
+                        <div class="text-blue-100 text-lg leading-relaxed mb-10 max-w-3xl">
+                            <p class="mb-5">
+                                Arooth provides comprehensive digital solutions including:
+                            </p>
+
+                            <ul class="list-disc list-inside space-y-3 pl-1">
+                                <li>Web Design & Development</li>
+                                <li>Brand Identity & Strategy</li>
+                                <li>Digital Marketing</li>
+                                <li>UI/UX Design</li>
+                                <li>SEO Optimization</li>
+                            </ul>
+                        </div>
+
+                        <!-- CTA -->
+                        <button
+                            class="group inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-blue-50 hover:gap-4">
+                            More About Us
+                            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Question 05 -->
+            <div class="accordion-item">
+                <input type="radio" name="accordion" id="q5">
+                <label for="q5"
+                    class="accordion-wrapper block bg-slate-100 rounded-3xl p-6 cursor-pointer hover:shadow-xl transition-all  h-[600px] flex flex-col">
+                    <div class="question-header flex justify-between items-start h-full">
+                        <h3 class="question-text text-lg font-medium text-gray-800">How much do your services cost?</h3>
+                        <span class="toggle-btn text-2xl font-light text-blue-600 transition-colors"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="flex justify-between items-center mb-8 ">
+                            <h3 class="text-sm tracking-widest uppercase text-blue-200 font-medium">
+                                Question 01
+                            </h3>
+                            <span class="toggle-btn text-3xl font-light text-white transition-transform duration-300">
+                            </span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-4xl font-bold text-white mb-6 leading-tight max-w-3xl">
+                            Question Answer:
+                        </h4>
+
+                        <!-- Content -->
+                        <div class="text-blue-100 text-lg leading-relaxed mb-10 max-w-3xl">
+                            <p class="mb-5">
+                                Arooth provides comprehensive digital solutions including:
+                            </p>
+
+                            <ul class="list-disc list-inside space-y-3 pl-1">
+                                <li>Web Design & Development</li>
+                                <li>Brand Identity & Strategy</li>
+                                <li>Digital Marketing</li>
+                                <li>UI/UX Design</li>
+                                <li>SEO Optimization</li>
+                            </ul>
+                        </div>
+
+                        <!-- CTA -->
+                        <button
+                            class="group inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-blue-50 hover:gap-4">
+                            More About Us
+                            <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </label>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="relative bg-gradient-to-b from-white to-[#cfe6ff] overflow-hidden">
+        <div class="border-t border-blue-100 py-6 text-center text-sm"></div>
+        <div class="max-w-7xl mx-auto px-6 py-24">
+
+            <!-- Title -->
+            <h2
+                class="text-5xl md:text-[120px] font-light tracking-wide mb-16 flex flex-wrap justify-center items-center gap-4">
+
+                <span class="font-normal">PR</span>
+
+
+                <span
+                    class="inline-flex items-center justify-center w-[120px] h-[100px] bg-blue-600 rounded-full  align-middle">
+                    <span class="text-white text-2xl">↗</span>
+                </span>
+
+                <span class="font-normal">JECT</span>
+
+                <span>IN</span>
+                <span class="text-blue-600 italic">MIND?</span>
+            </h2>
+
+            <!-- Social buttons -->
+            <div class="flex flex-wrap gap-6 justify-center">
+                <button
+                    class="flex items-center justify-center gap-3 px-10 py-4 bg-white rounded-full w-[280px] h-[50px] shadow-sm text-sm font-medium hover:bg-blue-50 transition">
+                    <span class="text-lg">f</span>
+                    FACEBOOK
+                </button>
+
+                <button
+                    class="flex items-center justify-center gap-3 px-10 py-4 bg-white rounded-full  w-[280px] h-[50px] shadow-sm text-sm font-medium hover:bg-blue-50 transition">
+                    <span class="text-lg">𝕏</span>
+                    TWITTER
+                </button>
+
+                <button
+                    class="flex items-center justify-center gap-3 px-10 py-4 bg-white rounded-full w-[280px] h-[50px]  shadow-sm text-sm font-medium hover:bg-blue-50 transition">
+                    <span class="text-lg">◎</span>
+                    DRIBBLE
+                </button>
+
+                <button
+                    class="flex items-center justify-center gap-3 px-10 py-4 bg-white rounded-full  w-[280px] h-[50px]  shadow-sm text-sm font-medium hover:bg-blue-50 transition">
+                    <span class="text-lg">📷</span>
+                    INSTAGRAM
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-[#cfe6ff] text-gray-700">
+        <!-- Main footer -->
+        <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <!-- Brand -->
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
+                    <h2 class="text-xl font-semibold text-gray-900">Arooth</h2>
+                </div>
+                <p class="text-sm leading-relaxed mb-6">
+                    We combine strategy, creativity, and technology to help brands grow in
+                    the modern digital landscape.
+                </p>
+
+                <!-- Email input -->
+                <div class="flex items-center bg-white rounded-full overflow-hidden w-full max-w-sm">
+                    <input type="email" placeholder="Enter your email..."
+                        class="flex-1 px-5 py-3 outline-none text-sm" />
+                    <button class="bg-blue-600 text-white w-10 h-10 flex items-center justify-center rounded-full m-1">
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Pages -->
+            <div>
+                <h3 class="font-semibold text-gray-900 mb-4">Main Pages</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>Home <span class="text-blue-600">•</span> About Us</li>
+                    <li>Services <span class="text-blue-600">•</span> Projects</li>
+                    <li>Blogs <span class="text-blue-600">•</span> Contact</li>
+                </ul>
+            </div>
+
+            <!-- Utility Pages -->
+            <div>
+                <h3 class="font-semibold text-gray-900 mb-4">Utility Pages</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>Password Protected <span class="text-blue-600">•</span> All Licenses</li>
+                    <li>404 <span class="text-blue-600">•</span> Changelog <span class="text-blue-600">•</span> Style
+                        Guide</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3 class="font-semibold text-gray-900 mb-4">Contact</h3>
+                <p class="text-sm mb-2">
+                    4140 Parker Rd. Allentown,<br />
+                    New Mexico 31134
+                </p>
+                <p class="text-sm mt-4">arooth@email.com</p>
+                <p class="text-sm">(302) 555-0107</p>
+            </div>
+
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="border-t border-blue-300 py-6 text-center text-sm">
+            © 2024 Copyright –
+            <span class="text-blue-600">Arooth</span> | Designed by
+            <span class="text-blue-600">“Amziro Web”</span> |
+            <span class="text-blue-600">License</span> |
+            Powered by <span class="text-blue-600">Webflow</span>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
